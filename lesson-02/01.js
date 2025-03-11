@@ -15,11 +15,7 @@ const hasTemporaryPass = false
 
 let isAccess
 
-let isUser;
-if (
-  (isUser =
-    isAdmin || (isVerifiedUser && hasSpecialPermission) || hasTemporaryPass)
-) {
+if (isAdmin || (isVerifiedUser && hasSpecialPermission) || hasTemporaryPass) {
   isAccess = true;
   console.log("Доступ получен!");
 } else {
