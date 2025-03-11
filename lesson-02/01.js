@@ -21,8 +21,8 @@ if (
     isAdmin || (isVerifiedUser && hasSpecialPermission) || hasTemporaryPass)
 ) {
   isAccess = true;
-  alert("Доступ получен!");
+  console.log("Доступ получен!");
 } else {
-  alert("В доступе отказано!");
+  console.log("В доступе отказано!");
 } 
 // your code
