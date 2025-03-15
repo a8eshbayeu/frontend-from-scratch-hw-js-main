@@ -8,5 +8,7 @@ function findLargest(a, b, c) {
       return b
    } else if (c > a && c > b) {
       return c
+   } else if (a = b = c) {
+      return a || b || c
    }
 }
