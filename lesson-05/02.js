@@ -36,11 +36,9 @@ const gallery = {
 }
 
 function updateGallery(gallery, key, value) {
-for (let key in gallery) {
   if (gallery.hasOwnProperty(key)) {
-    return gallery[key];
+    return key + value;
    } else if (key !== gallery[key]) {
-    return key;
+    return key + value;
   }
-}
 }
