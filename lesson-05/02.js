@@ -29,16 +29,18 @@ console.log(gallery)
 }
 */
 
-const gallery = {
-  'Mona Lisa': 'Leonardo da Vinci',
-  'Starry Night': 'Vincent van Gogh',
-  'The Scream': 'Edvard Munch',
-}
+ const gallery = {
+   'Mona Lisa': 'Leonardo da Vinci',
+   'Starry Night': 'Vincent van Gogh',
+   'The Scream': 'Edvard Munch',
+ }
 
-function updateGallery(gallery, key, value) {
-  if (gallery.hasOwnProperty(key)) {
-    return key + value;
-   } else if (key !== gallery[key]) {
-    return key + value;
-  }
+function updateGallery(gallery, newKey, newValue) {
+   for (let key in gallery) {
+     if (newKey !== gallery.key) {
+       gallery[newKey] = newValue;
+     } else if (newKey === gallery.key && newValue !== gallery[key]) {
+       gallery.key = newValue;
+     }
+   }
 }
