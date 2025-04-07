@@ -11,7 +11,6 @@
 
 🧙‍♂️ Совет: обратите внимание на управление индексом текущего изображения — это ключ к успешному переключению изображений.
 */
-
 const WEB_TECH_IMAGES = [
     'https://production-it-incubator.s3.eu-central-1.amazonaws.com/file-manager/Image/32f74d50-68d0-46aa-b035-7b3a5300d2c1_js-magic-logo.jpg',
     'https://production-it-incubator.s3.eu-central-1.amazonaws.com/file-manager/Image/c8a1f4a6-1337-4899-bdfd-a8c9c7bb806a_css-magic-logo.jpg',
@@ -25,78 +24,58 @@ document.body.append(mySlider)
 
 const slide_1 = document.createElement("img")
 slide_1.setAttribute("src", WEB_TECH_IMAGES[0])
+slide_1.classList.add('item')
 mySlider.append(slide_1)
 
 const slide_2 = document.createElement("img")
 slide_2.setAttribute("src", WEB_TECH_IMAGES[1])
+slide_2.classList.add('item')
 mySlider.append(slide_2)
 
 const slide_3 = document.createElement("img")
 slide_3.setAttribute("src", WEB_TECH_IMAGES[2])
+slide_3.classList.add('item')
 mySlider.append(slide_3)
 
-const sliderItems = Array.from(mySlider.children)
-
-const buttons = document.createElement('div')
-buttons.classList.add('controls')
-document.body.append(buttons)
 
 const prevBtn = document.createElement("button")
 prevBtn.textContent = 'prev'
-prevBtn.setAttribute('id', 'prev')
-buttons.append(prevBtn)
+prevBtn.classList.add('prev')
+prevBtn.onclick = function () {
+    prevSlide()
+}
+mySlider.append(prevBtn)
 
 const nextBtn = document.createElement("button")
 nextBtn.textContent = 'next'
-nextBtn.setAttribute('id', 'next')
-buttons.append(nextBtn)
-
-
-
-sliderItems.forEach(function (slide, index) {
-    // Скрываем все слайды кроме первого
-    if(index !== 0) slide.style.display = 'none'
-
-    // Добавляем индексы
-    slide.dataset.index = index
-
-    //Добавляем data атрибут active для первого/активного слайда
-    sliderItems[0].setAttribute('data-active', '')
-
-    // Клик по слайдам
-    // slide.addEventListener('click', function () {
-    //     showNextSlide('next')
-    // })
-})
-
+nextBtn.classList.add('next')
 nextBtn.onclick = function () {
-    console.log('next slide')
-    showNextSlide('next')
+    nextSlide()
+}
+mySlider.append(nextBtn)
+
+let slideIndex = 1
+showSlides(slideIndex)
+function nextSlide() {
+    showSlides(slideIndex += 1)
+}
+function prevSlide() {
+    showSlides(slideIndex -= 1)
+}
+function currentSlide(n) {
+    showSlides(slideIndex = n)
 }
 
-prevBtn.onclick = function () {
-    console.log('prev slide')
-    showNextSlide('prev')
-}
-
-function showNextSlide (direction) {
-    // Скрываем текущий слайд
-    const currentSlide = mySlider.querySelector('[data-active]')
-    const currentSlideIndex = +currentSlide.dataset.index
-    currentSlide.style.display = 'none'
-    currentSlide.removeAttribute('data-active')
-
-    //Рассчитываем следующий индекс
-    let nextSlideIndex
-    if(direction === 'next') {
-        nextSlideIndex = currentSlideIndex + 1 === sliderItems.length ? 0 : currentSlideIndex + 1
-    } else if (direction === 'prev') {
-        nextSlideIndex = currentSlideIndex === 0 ? sliderItems.length - 1 : currentSlideIndex - 1
+function showSlides(n) {
+    let slides = document.getElementsByClassName('item')
+    if(n > slides.length) {
+        slideIndex = 1
     }
-
-    //Показываем следующий слайд
-    const nextSlide = mySlider.querySelector(`[data-index="${nextSlideIndex}"]`)
-    nextSlide.style.display = 'block'
-    nextSlide.setAttribute('data-active', '')
+    if(n < 1) {
+        slideIndex = slides.length
+    }
+    for(let slide of slides) {
+        slide.style.display = 'none'
+    }
+    slides[slideIndex - 1].style.display = 'block'
 }
-
