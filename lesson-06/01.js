@@ -25,17 +25,14 @@ document.body.appendChild(mySlider)
 
 const slide_1 = document.createElement("img")
 slide_1.setAttribute("src", WEB_TECH_IMAGES[0])
-slide_1.classList.add('slide')
 mySlider.append(slide_1)
 
 const slide_2 = document.createElement("img")
 slide_2.setAttribute("src", WEB_TECH_IMAGES[1])
-slide_2.classList.add('slide')
 mySlider.append(slide_2)
 
 const slide_3 = document.createElement("img")
 slide_3.setAttribute("src", WEB_TECH_IMAGES[2])
-slide_3.classList.add('slide')
 mySlider.append(slide_3)
 
 const slides = Array.from(mySlider.querySelectorAll('img'))
