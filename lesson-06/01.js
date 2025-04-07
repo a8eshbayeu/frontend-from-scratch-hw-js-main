@@ -11,7 +11,6 @@
 
 🧙‍♂️ Совет: обратите внимание на управление индексом текущего изображения — это ключ к успешному переключению изображений.
 */
-
 const WEB_TECH_IMAGES = [
     'https://production-it-incubator.s3.eu-central-1.amazonaws.com/file-manager/Image/32f74d50-68d0-46aa-b035-7b3a5300d2c1_js-magic-logo.jpg',
     'https://production-it-incubator.s3.eu-central-1.amazonaws.com/file-manager/Image/c8a1f4a6-1337-4899-bdfd-a8c9c7bb806a_css-magic-logo.jpg',
@@ -20,8 +19,8 @@ const WEB_TECH_IMAGES = [
 // Создаём элементы слайдера
 
 const mySlider = document.createElement('div')
-mySlider.classList.add('mySlider')
-document.body.appendChild(mySlider)
+mySlider.classList.add('slider')
+document.body.append(mySlider)
 
 const slide_1 = document.createElement("img")
 slide_1.setAttribute("src", WEB_TECH_IMAGES[0])
@@ -35,45 +34,68 @@ const slide_3 = document.createElement("img")
 slide_3.setAttribute("src", WEB_TECH_IMAGES[2])
 mySlider.append(slide_3)
 
-const slides = Array.from(mySlider.children)
+const sliderItems = Array.from(mySlider.children)
 
-const slideCount = slides.length
-let slideIndex = 0
+const buttons = document.createElement('div')
+buttons.classList.add('controls')
+document.body.append(buttons)
 
 const prevBtn = document.createElement("button")
 prevBtn.textContent = 'prev'
-prevBtn.addEventListener("click", showPrevSlide)
-document.body.append(prevBtn)
+prevBtn.setAttribute('id', 'prev')
+buttons.append(prevBtn)
 
 const nextBtn = document.createElement("button")
 nextBtn.textContent = 'next'
-nextBtn.addEventListener("click", showNextSlide)
-document.body.append(nextBtn)
+nextBtn.setAttribute('id', 'next')
+buttons.append(nextBtn)
 
-// Функция для показа предыдущего слайда
 
-function showPrevSlide() {
-   slideIndex = (slideIndex - 1) % slideCount;
-   updateSlider()
-}
 
-// Функция для показа следующего слайда
+sliderItems.forEach(function (slide, index) {
+    // Скрываем все слайды кроме первого
+    if(index !== 0) slide.style.display = 'none'
 
-function showNextSlide() {
-    slideIndex = (slideIndex + 1) % slideCount;
-    updateSlider()
-}
+    // Добавляем индексы
+    slide.dataset.index = index
 
-// Функция для обновления отображения слайдера
+    //Добавляем data атрибут active для первого/активного слайда
+    sliderItems[0].setAttribute('data-active', '')
 
-function updateSlider() {
-    slides.forEach((slide, index) => {
-        if(index === slideIndex) {
-            slide.style.display = 'block'
-        } else {
-            slide.style.display = 'none'
-        }
+    // Клик по слайдам
+    slide.addEventListener('click', function () {
+        showNextSlide('next')
     })
+})
+
+nextBtn.onclick = function () {
+    console.log('next slide')
+    showNextSlide('next')
 }
 
-updateSlider()
+prevBtn.onclick = function () {
+    console.log('prev slide')
+    showNextSlide('prev')
+}
+
+function showNextSlide (direction) {
+    // Скрываем текущий слайд
+    const currentSlide = mySlider.querySelector('[data-active]')
+    const currentSlideIndex = +currentSlide.dataset.index
+    currentSlide.style.display = 'none'
+    currentSlide.removeAttribute('data-active')
+
+    //Рассчитываем следующий индекс
+    let nextSlideIndex
+    if(direction === 'next') {
+        nextSlideIndex = currentSlideIndex + 1 === sliderItems.length ? 0 : currentSlideIndex + 1
+    } else if (direction === 'prev') {
+        nextSlideIndex = currentSlideIndex === 0 ? sliderItems.length - 1 : currentSlideIndex - 1
+    }
+
+    //Показываем следующий слайд
+    const nextSlide = mySlider.querySelector(`[data-index="${nextSlideIndex}"]`)
+    nextSlide.style.display = 'block'
+    nextSlide.setAttribute('data-active', '')
+}
+
