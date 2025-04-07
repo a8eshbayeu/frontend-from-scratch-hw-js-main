@@ -35,7 +35,7 @@ const slide_3 = document.createElement("img")
 slide_3.setAttribute("src", WEB_TECH_IMAGES[2])
 mySlider.append(slide_3)
 
-const slides = Array.from(mySlider.querySelectorAll('img'))
+const slides = Array.from(mySlider.children)
 
 const slideCount = slides.length
 let slideIndex = 0
@@ -53,7 +53,7 @@ document.body.append(nextBtn)
 // Функция для показа предыдущего слайда
 
 function showPrevSlide() {
-   slideIndex = (slideIndex - 1 + slideCount) % slideCount;
+   slideIndex = (slideIndex - 1) % slideCount;
    updateSlider()
 }
 
