@@ -18,55 +18,26 @@ const WEB_TECH_IMAGES = [
   'https://production-it-incubator.s3.eu-central-1.amazonaws.com/file-manager/Image/784380b9-6937-42a6-bdfe-869835820234_html-magic-logo.jpg',
 ]
 
+ const prevBtn = document.getElementById('prev-button')
+ prevBtn.addEventListener('click', prevSlide)
 
- const slide_1 = document.getElementById('web-tech-image')
-slide_1.classList.add('slide')
-
- const slide_2 = document.createElement("img")
- slide_2.setAttribute("src", WEB_TECH_IMAGES[1])
- slide_2.classList.add('slide')
- slide_2.setAttribute('width','150')
-slide_2.setAttribute('height','150')
- slide_1.after(slide_2)
-
- const slide_3 = document.createElement("img")
- slide_3.setAttribute("src", WEB_TECH_IMAGES[2])
- slide_3.classList.add('slide')
-slide_3.setAttribute('width','150')
-slide_3.setAttribute('height','150')
- slide_2.after(slide_3)
+ const nextBtn = document.getElementById('next-button')
+ nextBtn.addEventListener('click', nextSlide)
 
 
-const prevBtn = document.getElementById('prev-button')
-prevBtn.onclick = function () {
-  prevSlide()
-}
+ let slideIndex = 0
 
-const nextBtn = document.getElementById('next-button')
-nextBtn.onclick = function () {
-  nextSlide()
-}
+ function nextSlide() {
+   slideIndex = (slideIndex + 1) % WEB_TECH_IMAGES.length
+     updateSlider()
+ }
+ function prevSlide() {
+   slideIndex = (slideIndex - 1 + WEB_TECH_IMAGES.length) % WEB_TECH_IMAGES.length
+     updateSlider()
+ }
 
-
-let slideIndex = 1
-showSlides(slideIndex)
-function nextSlide() {
-  showSlides(slideIndex += 1)
-}
-function prevSlide() {
-  showSlides(slideIndex -= 1)
-}
-
-function showSlides(n) {
-let slides = document.getElementsByClassName('slide')
-  if(n > slides.length) {
-    slideIndex = 1
-  }
-  if(n < 1) {
-    slideIndex = slides.length
-  }
-  for(let slide of slides) {
-    slide.style.display = 'none'
-  }
-  slides[slideIndex - 1].style.display = 'block'
-}
+ function updateSlider() {
+     const elemImg = document.getElementById('web-tech-image')
+     elemImg.src = WEB_TECH_IMAGES[slideIndex]
+ }
+ updateSlider()
