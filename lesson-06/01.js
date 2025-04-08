@@ -56,9 +56,6 @@ function nextSlide() {
 function prevSlide() {
   showSlides(slideIndex -= 1)
 }
-function currentSlide(n) {
-  showSlides(slideIndex = n)
-}
 
 function showSlides(n) {
 let slides = document.getElementsByClassName('slide')
