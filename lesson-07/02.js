@@ -2,9 +2,9 @@
  * Напишите функцию isNumeric, которая принимает строку и проверяет, представляет ли эта строка корректное числовое значение.
  * Если строка является числом, функция должна возвращать true, в противном случае - false.
  */
-
 function isNumeric(str) {
-  // your code
+    const num = Number(str)
+    return (num === 0) ? false: !isNaN(num);
 }
 
 // console.log(isNumeric("123")) // Ожидаемый результат: true
