@@ -38,8 +38,8 @@ startButton.addEventListener('click', () => {
     // your code
     function updateTimer() {
         if (counter > 1) {
-            counter--
             countdownDisplay.textContent = counter
+            counter--
         } else {
             countdownDisplay.textContent = '🚀'
         }
