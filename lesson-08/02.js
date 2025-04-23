@@ -36,9 +36,7 @@ startButton.addEventListener('click', () => {
     let counter = 3
 
     // your code
-    countdownDisplay.textContent = counter
-
-    function updateTimer() {
+        function updateTimer() {
         if (counter > 0) {
             countdownDisplay.textContent = counter--
         } else {
