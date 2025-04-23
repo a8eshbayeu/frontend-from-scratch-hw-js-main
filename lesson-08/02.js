@@ -33,7 +33,7 @@ let isTimerStarted = false
 let timerId
 
 startButton.addEventListener('click', () => {
-  let counter = 4
+  let counter = 3
   // your code
 function updateTimer() {
     if(counter > 1){
