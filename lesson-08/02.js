@@ -33,11 +33,11 @@ let isTimerStarted = false
 let timerId
 
 startButton.addEventListener('click', () => {
-    let counter = 3
+    let counter = 4
 
     // your code
     function updateTimer() {
-        if (counter > 1) {
+        if (counter > 1 && isTimerStarted === true) {
             counter--
             countdownDisplay.textContent = counter
         } else {
